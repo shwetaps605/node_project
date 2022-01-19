@@ -3,7 +3,6 @@ import products from '../data/products.js'
 
 class ProductsController {
 
-
     static apiGetProducts(req, res, next) {
         try {
             const data = {
