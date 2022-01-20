@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './App.scss'
 import ProductsDataService from './services/products.service'
 import ProductList from './components/product-list/product-list.component'
+import AddProduct from './components/adding-product/adding-product.component'
 
 const App = () => {
     const [products, setProducts] = useState([])
@@ -28,6 +29,7 @@ const App = () => {
                 <h1><strong><span>furnish.co</span></strong></h1>
                 <p>Bring home a piece of delight</p>
             </div>
+            <AddProduct/>
             <ProductList products={products}></ProductList>
 
         </div>
