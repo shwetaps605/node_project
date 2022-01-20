@@ -1,37 +1,35 @@
-import {useState, useEffect} from 'react'
-import './App.css'
+import { useState, useEffect } from 'react'
+import './App.scss'
 import ProductsDataService from './services/products.service'
-import Product from './components/product.component'
+import ProductList from './components/product-list/product-list.component'
 
 const App = () => {
     const [products, setProducts] = useState([])
 
-    useEffect(()=>{
+    useEffect(() => {
         fetchProducts()
-    },[])
+    }, [])
 
     const fetchProducts = () => {
         ProductsDataService.getAllProducts()
-        .then(response => {
-            //console.log(response.data.products)
-            setProducts(response.data.products)
-        })
-        .catch(error => console.log(error))
+            .then(response => {
+                //console.log(response.json());
+                //console.log(response.data.products)
+                setProducts(response.data.products)
+            })
+            .catch(error => console.log(error))
     }
 
-    console.log(products);
 
-    return(
-        <div>
-            <h1>App Component</h1>
-            <div className='container'>
-                {
-                    products.map((product)=>{
-                        console.log(product);
-                        <Product key={product.id} product={product}></Product>
-                    })
-                }
+
+    return (
+        <div className='conatiner'>
+            <div className='header__container'>
+                <h1><strong><span>furnish.co</span></strong></h1>
+                <p>Currently selling {products.length} pieces of delight</p>
             </div>
+            <ProductList products={products}></ProductList>
+
         </div>
     )
 

@@ -2,10 +2,10 @@ import React from "react"
 
 const Product = props => {
     const {product} = props
+    console.log(product);
 
     return(
         <div>
-            <h1>Product Component</h1>
             <div className="product__container">
                 <p>{product.name}</p>
                 <p>{product.price}</p>
