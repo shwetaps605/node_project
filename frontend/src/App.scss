@@ -6,11 +6,14 @@
     box-sizing: border-box;
 }
 
-.conatiner {
+.container {
     padding:1rem ;
     background-color: #ddd;
-    height: 100vh;
-
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .header__container {
@@ -25,10 +28,12 @@
     flex-direction: column;
     justify-content: center;
     text-align: center;
+    width: 100%;
 }
 .header__container p {
-    color: #333;
+    color: rgb(37, 37, 37);
+    font-weight: 700;
     margin-top: 0.5rem;
-    font-family: 'Roboto Mono';
+    font-family: 'Roboto Mono',sans-serif;
 }
 

@@ -23,10 +23,10 @@ const App = () => {
 
 
     return (
-        <div className='conatiner'>
+        <div className='container'>
             <div className='header__container'>
                 <h1><strong><span>furnish.co</span></strong></h1>
-                <p>Currently selling {products.length} pieces of delight</p>
+                <p>Bring home a piece of delight</p>
             </div>
             <ProductList products={products}></ProductList>
 

@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Montserrat:wght@200&family=Roboto+Mono:wght@200&display=swap');
+
+.products__list__container {
+    width: 80%;
+    padding: 1.5rem;
+    // background-color: aliceblue;
+    font-family: 'Roboto Mono',sans-serif;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    gap: 1rem;
+}
+
+.product {
+    border-radius: 10px;
+    border:1px solid #333;
+    background-color: #faebd7;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.products__list__container > div:nth-child(odd) {
+    background-color: #d1c0c0;
+}
+
+.product__image {
+    background-image: url('https://dl.airtable.com/.attachments/6ac7f7b55d505057317534722e5a9f03/9183491e/product-3.jpg');
+    background-repeat:no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 200px;
+    justify-content: center;
+}
+
+.product__name {
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
+
+.product__price {
+    float: right;
+    font-weight: bold;
+}
+
+.product__desc {
+    margin-top: 1rem;
+}
+
+
+
+
+
