@@ -27,13 +27,15 @@ class ProductsController {
 
     static apiAddProduct(req, res, next) {
 
+        const data = req.body.product
+
         let new_id = products.length + 1
         try {
             let product = {
                 id: new_id,
-                name: req.body.name,
-                price: req.body.price,
-                desc: req.body.desc
+                name: data.name,
+                price: data.price,
+                desc: data.desc
             }
             products.push(product)
             res.status(200).json({ message: "Successfully added product!", product })

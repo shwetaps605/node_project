@@ -65,9 +65,7 @@ button:hover {
     cursor: pointer;
 }
 
-.cta > button > svg {
-    color: coral;
-}
+
 
 .search__product__container {
     border: 1px solid #333;
@@ -86,5 +84,55 @@ button:hover {
         
     }
 }
+
+.add__products__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+
+    button{
+        background:transparent;
+        border: none;
+        text-decoration: none;
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+    }
+
+}
+
+.add__products__form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+
+    input {
+        border: none;
+        padding: 0.5rem;
+        background: transparent;
+        border: 1px solid #333;
+        border-radius: 7px;
+        margin-left: 1rem;
+        
+    }
+
+    div {
+        margin-left: 1rem;
+        display: grid;
+        transform: translateY(8px);
+        justify-content: center;
+
+        button {
+            color:#974444;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+    }
+
+}
+
+
 
 

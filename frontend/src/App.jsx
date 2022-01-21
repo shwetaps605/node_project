@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import './App.scss'
 import ProductsDataService from './services/products.service'
 import ProductList from './components/product-list/product-list.component'
-import AddProduct from './components/adding-product/adding-product.component'
 
 const App = () => {
     return (
@@ -292,7 +291,7 @@ const App = () => {
                 
 
             </div>
-            <AddProduct />
+            
             <ProductList></ProductList>
 
         </div>

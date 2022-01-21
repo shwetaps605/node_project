@@ -42,6 +42,7 @@
     }
 
     svg {
+        visibility: hidden;
         height:150%;
         position: absolute;
         left:-18%;
@@ -51,11 +52,9 @@
 
     @keyframes sway {
         from{
-            opacity: 0.3;
             transform: rotate(0);
         }
         to {
-            opacity: 1;
             transform: rotate(5deg);
         }
         
