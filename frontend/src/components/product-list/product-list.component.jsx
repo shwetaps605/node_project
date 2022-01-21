@@ -7,7 +7,7 @@ const ProductList = (props) => {
 
     const [products, setProducts] = useState([])
     const [filterText, setFilterText] = useState("")
-    const [isAdding, setIsAdding] = useState(true)
+    const [isAdding, setIsAdding] = useState(false)
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState("")
     const [productDesc, setProductDesc] = useState("")

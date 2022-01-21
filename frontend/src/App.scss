@@ -42,10 +42,9 @@
     }
 
     svg {
-        visibility: hidden;
         height:150%;
         position: absolute;
-        left:-18%;
+        left:-15%;
         top:10%;
         animation: sway 3s ease-in alternate-reverse infinite;
     }
@@ -60,5 +59,11 @@
         
     }
 
+   
 }
+
+input:focus {
+    outline:none;
+}
+
 
