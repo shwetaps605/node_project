@@ -20,7 +20,7 @@ class ProductsDataService {
     static updateProduct(id,data){
         console.log(id)
         console.log(data)
-        return ProductsClient.put(`/${id}`,data)
+        return ProductsClient.put(`/${id}`,{"product":data})
     }
 }
 

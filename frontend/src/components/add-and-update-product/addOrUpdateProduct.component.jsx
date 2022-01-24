@@ -40,7 +40,6 @@ const AddorUpdateProduct = props => {
     }
 
     const populateFields = () => {
-        console.log("firing UPDATE PRODUCT operation", props.productId);
         ProductsDataService.getProductsById(props.productId)
             .then(response => {
                 console.log(response.data.product)
@@ -49,27 +48,24 @@ const AddorUpdateProduct = props => {
                 setProductPrice(product.price)
                 setProductDesc(product.desc)
             })
+            .catch(error => console.log("Cannot fetch product",error))
     }
 
     const updateProduct = () => {
-        console.log("firing UPDATE PRODUCT operation", props.productId);
-
-
-        ProductsDataService.getProductsById(props.productId)
-            .then(response => {
-                let product = response.data.product
-
-                product.name = productName
-                product.price = productPrice
-                product.desc = productDesc
-                ProductsDataService.updateProduct(props.productId, product)
-                    .then(response => {
-                        console.log(response)
-                        props.updateProducts()
-                    })
-                    .catch(error => console.log(error))
-            })
-            .catch(error => console.log(error))
+        console.log("firing UPDATE PRODUCT operation", props.productId)
+        let updatedProduct = {
+            name:productName,
+            price:productPrice,
+            desc:productDesc
+        }
+        ProductsDataService.updateProduct(props.productId, updatedProduct)
+        .then(response => {
+            console.log(response)
+            props.updateProducts()
+            setIsSubmitted(true)
+            clearFields()
+        })
+        .catch(error => console.log("Cannot update product",error))
     }
 
     const handleChange = (e) => {
@@ -145,7 +141,7 @@ const AddorUpdateProduct = props => {
                 <div>
                     {
                         props.isUpdating ?
-                            <button onClick={populateFields}>
+                            <button onClick={updateProduct}>
                                 Update
                             </button> :
                             <button onClick={addProduct}>
