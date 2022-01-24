@@ -39,6 +39,9 @@
 
 .cta {
     margin-top: 1rem;
+    display:flex;
+    justify-content: space-between;
+    padding: 0.5rem;
 }
 
 .cta > button {

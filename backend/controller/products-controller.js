@@ -38,6 +38,7 @@ class ProductsController {
                 desc: data.desc
             }
             products.push(product)
+            console.log("Successfully added product!")
             res.status(200).json({ message: "Successfully added product!", product })
         } catch (e) {
             res.status(500).json({ error: e })
@@ -63,11 +64,14 @@ class ProductsController {
     }
 
     static apiUpdateProduct(req, res, next) {
+
+        const data = req.body.product
+
         try {
             let { id } = req.params
-            let name = req.body.name || ""
-            let price = req.body.price || -1
-            let desc = req.body.desc
+            let name = data.name || ""
+            let price = data.price || -1
+            let desc = data.desc
             
             let product = products.find(product => product.id === parseInt(id, 10))
             if (name.length !== 0) {
@@ -79,6 +83,7 @@ class ProductsController {
             if (desc.length !== 0) {
                 product.desc = desc
             }
+            console.log("Successfully updated product!")
             res.status(200).json({ message: "Updated product succesfully", product })
         } catch (e) {
             res.status(500).json({ error: e })
