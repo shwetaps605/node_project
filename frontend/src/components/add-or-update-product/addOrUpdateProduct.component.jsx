@@ -34,8 +34,8 @@ const AddorUpdateProduct = props => {
         ProductsDataService.addProduct(product)
             .then(response => {
                 props.updateProducts()
-                setTimeout(()=>{setIsSubmitted(true)},3000)
-                setIsSubmitted(false)
+                setIsSubmitted(true)
+                setTimeout(() => { setIsSubmitted(false) }, 3000)
                 clearFields()
             })
             .catch(error => console.log(error))
@@ -61,8 +61,8 @@ const AddorUpdateProduct = props => {
         ProductsDataService.updateProduct(props.productId, updatedProduct)
             .then(response => {
                 props.updateProducts()
-                setTimeout(()=>{setIsSubmitted(true)},3000)
-                setIsSubmitted(false)
+                setIsSubmitted(true)
+                setTimeout(() => { setIsSubmitted(false) }, 3000)
                 clearFields()
             })
             .catch(error => console.log("Cannot update product", error))
@@ -152,7 +152,11 @@ const AddorUpdateProduct = props => {
             </div>
 
             {
-                isSubmitted ? <p>Operation done successfully</p> : ""
+                isSubmitted ?
+                    props.isUpdating ?
+                        <Response responseMessage="Product updated successfully" /> :
+                        <Response responseMessage="Product added successfully" />
+                    : ""
             }
         </>
     )
