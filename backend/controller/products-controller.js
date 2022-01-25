@@ -18,7 +18,7 @@ class ProductsController {
     static apiGetProductById(req, res, next) {
         try {
             let { id } = req.params
-            let product = products.find(product => product.id === parseInt(id, 10))
+            let product = products.find(product => product.id === id)
             res.status(200).json({ message: "Success", product })
         } catch (e) {
             req.status(500).json({ error: e })
@@ -29,10 +29,10 @@ class ProductsController {
 
         const data = req.body.product
 
-        let new_id = products.length + 1
+        // let new_id = products.length + 1
         try {
             let product = {
-                id: new_id,
+                id: data.id,
                 name: data.name,
                 price: data.price,
                 desc: data.desc
@@ -51,7 +51,7 @@ class ProductsController {
             let deletedProduct
             console.log(id)
             products.forEach((product, index) => {
-                if (product.id === parseInt(id, 10)) {
+                if (product.id === id) {
                     deletedProduct = product
                     console.log("Removing product", product)
                     products.splice(index, 1)
@@ -73,7 +73,7 @@ class ProductsController {
             let price = data.price || -1
             let desc = data.desc
             
-            let product = products.find(product => product.id === parseInt(id, 10))
+            let product = products.find(product => product.id === id )
             if (name.length !== 0) {
                 product.name = name
             }

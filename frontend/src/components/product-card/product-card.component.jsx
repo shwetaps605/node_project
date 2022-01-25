@@ -1,15 +1,19 @@
 import React from "react"
 import './product-card.styles.scss'
 
+
 const ProductCard = (props) => {
+
+    const background__image__url = props.product.image ? props.product.image : "https://i.postimg.cc/J4chyj5b/image-product.png"
 
     return (
         <>
             <div className="product">
                 <div
                     className='product__image'
+    
                     style={{
-                        backgroundImage: `url(${props.product.image})`
+                        backgroundImage: `url(${background__image__url})`
                     }}
                 />
 

@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react'
 import './addOrUpdateProduct.styles.scss'
 import ProductsDataService from '../../services/products.service'
+import { v4 as uuidv4 } from 'uuid';
+import Response from '../response/response.component';
 
 const AddorUpdateProduct = props => {
 
-    const [isFormOpen, setIsFormVisible] = useState(true)
+    // const [isFormOpen, setIsFormVisible] = useState(true)
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState("")
     const [productDesc, setProductDesc] = useState("")
     const [isSubmitted, setIsSubmitted] = useState(false)
 
-    // const isUpdating = props.isUpdating
-
     useEffect(() => {
-        if(props.isUpdating)populateFields()
+        if (props.isUpdating) populateFields()
     }, [props.isUpdating])
-
 
 
     const clearFields = () => {
@@ -25,7 +24,9 @@ const AddorUpdateProduct = props => {
     }
 
     const addProduct = () => {
+        const id = uuidv4()
         let product = {
+            id: id,
             name: productName,
             price: productPrice,
             desc: productDesc
@@ -33,7 +34,8 @@ const AddorUpdateProduct = props => {
         ProductsDataService.addProduct(product)
             .then(response => {
                 props.updateProducts()
-                setIsSubmitted(true)
+                setTimeout(()=>{setIsSubmitted(true)},3000)
+                setIsSubmitted(false)
                 clearFields()
             })
             .catch(error => console.log(error))
@@ -42,34 +44,31 @@ const AddorUpdateProduct = props => {
     const populateFields = () => {
         ProductsDataService.getProductsById(props.productId)
             .then(response => {
-                console.log(response.data.product)
                 let product = response.data.product
                 setProductName(product.name)
                 setProductPrice(product.price)
                 setProductDesc(product.desc)
             })
-            .catch(error => console.log("Cannot fetch product",error))
+            .catch(error => console.log("Cannot fetch product", error))
     }
 
     const updateProduct = () => {
-        console.log("firing UPDATE PRODUCT operation", props.productId)
         let updatedProduct = {
-            name:productName,
-            price:productPrice,
-            desc:productDesc
+            name: productName,
+            price: productPrice,
+            desc: productDesc
         }
         ProductsDataService.updateProduct(props.productId, updatedProduct)
-        .then(response => {
-            console.log(response)
-            props.updateProducts()
-            setIsSubmitted(true)
-            clearFields()
-        })
-        .catch(error => console.log("Cannot update product",error))
+            .then(response => {
+                props.updateProducts()
+                setTimeout(()=>{setIsSubmitted(true)},3000)
+                setIsSubmitted(false)
+                clearFields()
+            })
+            .catch(error => console.log("Cannot update product", error))
     }
 
     const handleChange = (e) => {
-        // console.log(e.target.name, e.target.value);
         if (e.target.name === "productNameInput") {
             const name = e.target.value
             if (name) {
@@ -104,10 +103,8 @@ const AddorUpdateProduct = props => {
             <div className='add__products__form'>
 
                 <div>
-                    <button>
-                        <svg width="18" height="18" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M22 19.168L13.815 10.981L22 2.807L19.168 0L10.986 8.179L2.81 0L0 2.81L8.186 11.006L0 19.19L2.81 22L11.013 13.808L19.193 22L22 19.168Z" fill="#974444" />
-                        </svg>
+                    <button onClick={!props.isUpdating ? props.toggleForm : () => { props.toggleForm("") }}>
+                        Close
                     </button>
                 </div>
 
@@ -153,6 +150,10 @@ const AddorUpdateProduct = props => {
                 </div>
 
             </div>
+
+            {
+                isSubmitted ? <p>Operation done successfully</p> : ""
+            }
         </>
     )
 }

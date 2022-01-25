@@ -3,7 +3,7 @@ import './product-list.component.scss'
 import Product from '../product/product.component'
 import ProductsDataService from '../../services/products.service'
 import ProductCard from '../product-card/product-card.component'
-import AddorUpdateProduct from '../add-and-update-product/addOrUpdateProduct.component'
+import AddorUpdateProduct from '../add-or-update-product/addOrUpdateProduct.component'
 
 
 const ProductList = (props) => {
@@ -21,9 +21,12 @@ const ProductList = (props) => {
 
     const toggleIsAddingProduct = () => {
         setIsAdding(!isAdding)
+        setIsUpdating(false)
     }
 
     const toggleIsUpdatingProduct = (id) => {
+        console.log("Toogle k andar product id is", id)
+        setIsAdding(false)
         setIsUpdating(!isUpdating)
         setProductId(id)
     }
@@ -55,7 +58,6 @@ const ProductList = (props) => {
             .catch(error => console.log(error))
     }
 
-
     return (
         <>
             <div className='add__products__container'>
@@ -64,6 +66,7 @@ const ProductList = (props) => {
                         <AddorUpdateProduct
                             isUpdating={false}
                             updateProducts={fetchProducts}
+                            toggleForm={toggleIsAddingProduct}
                         >
                         </AddorUpdateProduct> :
 
@@ -80,6 +83,7 @@ const ProductList = (props) => {
                         productId={productId}
                         isUpdating={true}
                         updateProducts={fetchProducts}
+                        toggleForm={() => { toggleIsUpdatingProduct("") }}
                     >
                     </AddorUpdateProduct>
                 }
