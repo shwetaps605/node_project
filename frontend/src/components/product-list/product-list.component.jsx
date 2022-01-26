@@ -25,7 +25,7 @@ const ProductList = (props) => {
     }
 
     const toggleIsUpdatingProduct = (id) => {
-        console.log("Toogle k andar product id is", id)
+        // console.log("Toogle k andar product id is", id)
         setIsAdding(false)
         setIsUpdating(!isUpdating)
         setProductId(id)
@@ -37,7 +37,7 @@ const ProductList = (props) => {
         setProducts(!filterText ? products : products.filter(product => {
             product.name.toLowerCase().includes(filterText.toLowerCase())
         }))
-        console.log(products);
+        // console.log(products);
     }
 
 
@@ -52,7 +52,7 @@ const ProductList = (props) => {
     const removeProduct = (productId) => {
         ProductsDataService.deleteProduct(productId)
             .then(response => {
-                console.log("Product deleted")
+                // console.log("Product deleted")
                 fetchProducts()
             })
             .catch(error => console.log(error))
