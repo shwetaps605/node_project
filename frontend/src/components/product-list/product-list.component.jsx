@@ -26,18 +26,38 @@ const ProductList = (props) => {
 
     const toggleIsUpdatingProduct = (id) => {
         setIsAdding(false)
-        setIsUpdating(!isUpdating)
+        if(productId.length == 0){
+            console.log("Abhi zero hai,should TOGGLE");
+            setIsUpdating(!isUpdating)
+        }else{
+            console.log("Abhi zero hai,should TOGGLE");
+            setIsUpdating(true)
+        }
         setProductId(id)
+    }
+
+    const searchisChanging = () => {
+        console.log("whoooooo");
     }
 
 
     const handleSearchInputChange = async e => {
-        const filteredProducts = products.filter(product => {
-            return product.name.toLowerCase().includes(e.target.value.toLowerCase())
-        })
-        console.log(e.target.value, filteredProducts)
-        setFilterText(e.target.value)
-        setProducts(filteredProducts)
+        if (e.target.value.length > 0) {
+            const filteredProducts = products.filter(product => {
+                return product.name.toLowerCase().includes(e.target.value.toLowerCase())
+            })
+            console.log(e.target.value, filteredProducts)
+            setFilterText(e.target.value)
+
+            setProducts(filteredProducts)
+        } else {
+
+            console.log("FUCKING SEARCH BOX IS EMPTYYYY", e.target.value);
+            fetchProducts()
+        }
+
+
+
     }
 
 
@@ -89,9 +109,9 @@ const ProductList = (props) => {
                 }
             </div>
 
-            <SearchBar input={filterText} handleChange={handleSearchInputChange} />
+            <SearchBar input={filterText} handleChange={handleSearchInputChange} onChange={searchisChanging} />
 
-            
+
 
             <div className="products__list__container">
                 {
