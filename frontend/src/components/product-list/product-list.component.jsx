@@ -4,7 +4,7 @@ import Product from '../product/product.component'
 import ProductsDataService from '../../services/products.service'
 import ProductCard from '../product-card/product-card.component'
 import AddorUpdateProduct from '../add-or-update-product/addOrUpdateProduct.component'
-
+import SearchBar from '../search-bar/search-bar.component'
 
 const ProductList = (props) => {
 
@@ -25,34 +25,34 @@ const ProductList = (props) => {
     }
 
     const toggleIsUpdatingProduct = (id) => {
-        // console.log("Toogle k andar product id is", id)
         setIsAdding(false)
         setIsUpdating(!isUpdating)
         setProductId(id)
     }
 
 
-    const handleSearchInputChange = async (e) => {
-        await setFilterText(e.target.value)
-        setProducts(!filterText ? products : products.filter(product => {
-            product.name.toLowerCase().includes(filterText.toLowerCase())
-        }))
-        // console.log(products);
+    const handleSearchInputChange = async e => {
+        const filteredProducts = products.filter(product => {
+            return product.name.toLowerCase().includes(e.target.value.toLowerCase())
+        })
+        console.log(e.target.value, filteredProducts)
+        setFilterText(e.target.value)
+        setProducts(filteredProducts)
     }
 
 
-    const fetchProducts = () => {
-        ProductsDataService.getAllProducts()
+    const fetchProducts = async () => {
+        await ProductsDataService.getAllProducts()
             .then(response => {
-                setProducts(response.data.products)
+                const fetchedProducts = response.data.products
+                setProducts(fetchedProducts)
             })
             .catch(error => console.log(error))
     }
 
-    const removeProduct = (productId) => {
-        ProductsDataService.deleteProduct(productId)
+    const removeProduct = async productId => {
+        await ProductsDataService.deleteProduct(productId)
             .then(response => {
-                // console.log("Product deleted")
                 fetchProducts()
             })
             .catch(error => console.log(error))
@@ -89,17 +89,9 @@ const ProductList = (props) => {
                 }
             </div>
 
-            <div className="search__product__container">
-                <div>
-                    <input type="text"
-                        name="searchField"
-                        onChange={handleSearchInputChange}
-                        value={filterText}
-                        id="searchInput"
-                        placeholder='search product' />
+            <SearchBar input={filterText} handleChange={handleSearchInputChange} />
 
-                </div>
-            </div>
+            
 
             <div className="products__list__container">
                 {

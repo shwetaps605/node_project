@@ -3,33 +3,13 @@
 .products__list__container {
     width: 80%;
     padding: 1.5rem;
-    // background-color: aliceblue;
     font-family: 'Roboto Mono',sans-serif;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 1.5rem;
 }
 
-.search__product__container {
-    width: 25%;
-    margin: auto;
-    border: 1px solid #333;
-    border-radius: 7px;
-    margin-bottom: 1rem;
-    div {
-        display: flex;
-        justify-content: space-between;
 
-        input {
-            border: none;
-            padding: 0.5rem;
-            background: transparent;
-            
-        }
-
-        
-    }
-}
 
 .add__products__container {
     display: flex;

@@ -6,7 +6,6 @@ import Response from '../response/response.component';
 
 const AddorUpdateProduct = props => {
 
-    // const [isFormOpen, setIsFormVisible] = useState(true)
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState("")
     const [productDesc, setProductDesc] = useState("")
