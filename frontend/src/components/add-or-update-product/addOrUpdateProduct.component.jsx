@@ -13,7 +13,8 @@ const AddorUpdateProduct = props => {
 
     useEffect(() => {
         if (props.isUpdating) populateFields()
-    }, [props.isUpdating])
+    }, [props.isUpdating, props.productId])
+    
 
 
     const clearFields = () => {
@@ -102,7 +103,7 @@ const AddorUpdateProduct = props => {
             <div className='add__products__form'>
 
                 <div>
-                    <button onClick={!props.isUpdating ? props.toggleForm : () => { props.toggleForm("") }}>
+                    <button onClick={props.handleClose}>
                         Close
                     </button>
                 </div>

@@ -11,7 +11,7 @@ const SearchBar = (props) => {
             type="text"
             value={props.input}
             placeholder="what are you lookin for ?"
-            onChange={props.handleChange} />
+            onChange={(e)=>props.handleChange(e)} />
 
     )
 }
