@@ -1,7 +1,7 @@
 .product {
     border-radius: 10px;
     border:1px solid #333;
-    background-color:#ceb1b1;
+    background-color:#89b1ad;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
 }
 
 .products__list__container > div:nth-child(odd) {
-    background-color: #b0c2aa;
+    background-color: #cec595;
 }
 
 .product__image {

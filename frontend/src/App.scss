@@ -8,7 +8,7 @@
 
 .container {
     padding:1rem ;
-    background-color: #ddd;
+    background-color: rgb(229, 230, 192);
     position: relative;
     display: flex;
     flex-direction: column;
@@ -18,10 +18,10 @@
 
 .header__container {
     position: relative;
-    color: #974444;
+    color: #161515;
     font-family: 'Abril Fatface', cursive;
     font-size: 1.5rem;
-    background-color: #f4f4f4;
+    background-color: #abcaa1;
     padding: 2rem;
     margin-bottom:1rem;
     border:1px solid #333;
@@ -42,6 +42,7 @@
     }
 
     svg {
+        visibility: hidden;
         height:150%;
         position: absolute;
         left:-15%;
