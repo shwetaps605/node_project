@@ -13,11 +13,15 @@ const ProductList = (props) => {
     const [isAdding, setIsAdding] = useState(false)
     const [isUpdating, setIsUpdating] = useState(false)
     const [productId, setProductId] = useState("")
-    const [filteredProducts,setFilteredProducts] = useState([])
+    const [filteredProducts, setFilteredProducts] = useState([])
 
     useEffect(() => {
         fetchProducts()
     }, [])
+
+    useEffect(() => {
+        filterProducts()
+    }, [filterText])
 
 
     const toggleIsUpdatingProduct = (id) => {
@@ -26,29 +30,22 @@ const ProductList = (props) => {
         setIsUpdating(true)
     }
 
-    const searchisChanging = () => {
-        console.log("whoooooo");
-    }
-
 
     const handleSearchInputChange = async e => {
-        if (e.target.value.length > 0) {
-            console.log(e.target.value.length,"-->",e.target.value)
-            const filteredProducts = products.filter(product => {
-                return product.name.toLowerCase().includes(e.target.value.toLowerCase())
-            })
-            console.log(e.target.value, filteredProducts)
-            setFilterText(e.target.value)
+        setFilterText(e.target.value)
+    }
 
-            setProducts(filteredProducts)
-        } else {
-
-            console.log("FUCKING SEARCH BOX IS EMPTYYYY", e.target.value);
-            console.log(e.target.value.length,"-->",e.target.value)
-            fetchProducts()
-            setFilterText("")
+    const filterProducts = () => {
+        if (filterText.length == 0){
+            setFilteredProducts(products)
         }
-
+        if (filterText.length > 0) {
+            const filteredProductss = products.filter(product => {
+                return product.name.toLowerCase().includes(filterText.toLowerCase())
+            })
+            setFilteredProducts(filteredProductss)
+        }
+        
     }
 
 
@@ -78,11 +75,11 @@ const ProductList = (props) => {
                         <AddorUpdateProduct
                             isUpdating={false}
                             updateProducts={fetchProducts}
-                            handleClose={()=> setIsAdding(false)}
+                            handleClose={() => setIsAdding(false)}
                         >
                         </AddorUpdateProduct> :
 
-                        <button onClick={()=>setIsAdding(true)} >
+                        <button onClick={() => setIsAdding(true)} >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm6 13h-5v5h-2v-5h-5v-2h5v-5h2v5h5v2z" />
                             </svg>
@@ -95,19 +92,19 @@ const ProductList = (props) => {
                         productId={productId}
                         isUpdating={true}
                         updateProducts={fetchProducts}
-                        handleClose={()=> setIsUpdating(false)}
+                        handleClose={() => setIsUpdating(false)}
                     >
                     </AddorUpdateProduct>
                 }
             </div>
 
-            <SearchBar input={filterText} handleChange={handleSearchInputChange} onChange={searchisChanging} />
+            <SearchBar input={filterText} handleChange={handleSearchInputChange} />
 
 
 
             <div className="products__list__container">
                 {
-                    products.map(product => (
+                    filteredProducts.map(product => (
 
                         <ProductCard
                             key={product.id}
