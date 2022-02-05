@@ -1,14 +1,36 @@
-import { useState, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import './App.scss'
-import ProductsDataService from './services/products.service'
+import { gsap } from "gsap"
 import ProductList from './components/product-list/product-list.component'
 
 const App = () => {
+
+    const mainRef = useRef()
+    const mainSelector = gsap.utils.selector(mainRef)
+    const headerRef = useRef();
+    const selectorH = gsap.utils.selector(headerRef)
+    const t1 = useRef()
+
+    useEffect(() => {
+        t1.current = gsap.timeline()
+            .to(headerRef.current,
+                {
+                    y: 10,
+                    duration: 1,
+                    
+                })
+            .to(selectorH(".header__text"),
+                {
+                    y: -10,
+                    stagger: 0.25
+                })
+    })
+
     return (
-        <div className='container'>
-            <div className='header__container'>
-                <h1><strong><span>furnish.co</span></strong></h1>
-                <p>Bring home a piece of delight</p>
+        <div className='container' ref={mainRef}>
+            <div className='header__container' ref={headerRef}>
+                <h1 className='header__text'><strong><span>furnish.co</span></strong></h1>
+                <p className='header__text'>Bring home a piece of delight</p>
                 <svg width="632" height="600" viewBox="0 0 632 600" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M630.608 21.8652C626.408 22.7652 622.108 22.9652 617.908 23.8652C613.908 24.7652 609.808 25.7652 605.808 26.6652C601.508 27.6652 597.108 28.1652 592.808 29.0652C588.508 29.9652 584.308 31.0652 580.108 32.1652C563.308 36.1652 546.908 42.6652 530.908 48.9652C514.808 55.3652 498.908 62.2652 483.208 69.6652C475.408 73.2652 467.408 76.8652 459.708 80.7652C456.208 82.5652 452.708 84.3652 449.208 86.1652C447.508 87.0652 445.708 87.9652 444.008 88.9652C441.508 90.2652 439.508 91.9652 437.208 93.4652C429.208 98.7652 422.008 105.165 413.908 110.365C405.708 115.565 396.808 120.365 389.208 126.465C388.208 127.265 388.508 128.665 389.308 129.265C463.608 79.9652 545.208 45.2652 630.808 21.8652C630.708 21.8652 630.608 21.8652 630.608 21.8652Z" fill="url(#paint0_linear_455_1631)" />
                     <path d="M630.808 21.8652C545.208 45.2652 463.608 79.9652 389.308 129.265C389.708 129.565 390.208 129.565 390.708 129.365C398.308 125.765 405.408 120.965 412.808 116.965C420.608 112.765 428.708 109.765 436.908 106.465C440.508 104.965 444.208 103.665 447.808 102.165C451.908 100.365 455.908 97.9652 459.908 95.9652C467.508 92.1652 474.908 88.1652 482.608 84.4652C498.008 77.0652 513.708 70.0652 529.608 63.5652C545.508 57.0652 561.708 51.3652 577.508 44.9652C586.308 41.4652 594.908 37.5652 603.508 33.5652C607.808 31.5652 612.308 30.0652 616.708 28.5652C621.508 26.8652 626.108 24.4652 630.908 22.8652C631.208 22.6652 631.108 21.9652 630.808 21.8652Z" fill="#003134" />
@@ -288,10 +310,10 @@ const App = () => {
                     </defs>
                 </svg>
 
-                
+
 
             </div>
-            
+
             <ProductList></ProductList>
 
         </div>

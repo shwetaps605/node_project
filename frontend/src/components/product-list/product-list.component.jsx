@@ -1,12 +1,18 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './product-list.component.scss'
 import Product from '../product/product.component'
 import ProductsDataService from '../../services/products.service'
 import ProductCard from '../product-card/product-card.component'
 import AddorUpdateProduct from '../add-or-update-product/addOrUpdateProduct.component'
 import SearchBar from '../search-bar/search-bar.component'
+import { gsap } from "gsap"
+
 
 const ProductList = (props) => {
+
+    const t1 = useRef()
+    const mainRef = useRef()
+
 
     const [products, setProducts] = useState([])
     const [filterText, setFilterText] = useState("")
@@ -23,6 +29,15 @@ const ProductList = (props) => {
         filterProducts()
     }, [filterText])
 
+    useEffect(() => {
+        t1.current = gsap.timeline()
+            .to(mainRef.current, 
+                {
+                    y:-5,
+                    delay:1
+                })
+    })
+
 
     const toggleIsUpdatingProduct = (id) => {
         setIsAdding(false)
@@ -36,7 +51,7 @@ const ProductList = (props) => {
     }
 
     const filterProducts = () => {
-        if (filterText.length == 0){
+        if (filterText.length == 0) {
             setFilteredProducts(products)
         }
         if (filterText.length > 0) {
@@ -45,7 +60,7 @@ const ProductList = (props) => {
             })
             setFilteredProducts(filteredProductss)
         }
-        
+
     }
 
 
@@ -102,7 +117,7 @@ const ProductList = (props) => {
 
 
 
-            <div className="products__list__container">
+            <div className="products__list__container" ref={mainRef}>
                 {
                     filteredProducts.map(product => (
 
